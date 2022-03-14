@@ -8,15 +8,22 @@
   <script>
     console.log("Script loaded") //print if script has started
     function computerPlay(){
-
+      let test = "Rock"
+      return test
+    }
+    function game(player, computer){
+      console.log(player + " vs " + computer)
+      //check player choice and computer choice to decide winner
     }
     for (let i = 0; i < 5; i++) {
       if (i == 1) {
         console.log("Loop started")
       }
       console.log("Round " + (parseFloat(i)+1)) //printing round
-      let userChoice = prompt("Enter Rock, Paper, or Scissors!")
-      console.log(userChoice)
+      let playerSelection = prompt("Enter Rock, Paper, or Scissors!")
+      let computerSelection = computerPlay()
+      game(playerSelection, computerSelection)
+      console.log(playerSelection)
     }
     console.log("Script finished") //print if script has ran fully
   </script>
