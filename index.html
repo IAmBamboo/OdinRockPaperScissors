@@ -8,30 +8,34 @@
   <script>
     console.log("Script loaded") //print if script has started
     function computerPlay(){ //randomly picks between Rock,Paper,Scissors
-      let test = "Rock"
-      return test
+      let choice = ["Rock","Paper","Scissors"];
+      let randomChoice = choice[Math.floor(Math.random()*choice.length)]
+      return randomChoice
     }
     function playRound(player, computer){
       //check choices and give point to winner
     }
-    function game(player, computer){ //execute rounds, keep track of score
-      console.log(player + " vs " + computer)
+    function game(){ //execute rounds, keep track of score
       let userScore = 0
       let computerScore = 0
-      //check player choice and computer choice to decide winner
-      //run playRound()
-    }
-    for (let i = 0; i < 5; i++) {
-      if (i == 1) {
-        console.log("Loop started")
+      for (let i = 0; i < 5; i++) {
+        if (i == 1) {
+          console.log("Loop started")
+        }
+        console.log("Round " + (parseFloat(i)+1)) //printing round
+        let playerSelection = prompt("Enter Rock, Paper, or Scissors!").toLowerCase()
+        let computerSelection = computerPlay()
+        //call playRound(playerSelection, computerSelection)
+        console.log(playerSelection)
+        console.log(playerSelection + " vs " + computerSelection)
+        userScore++
+        computerScore++
+        console.log(userScore)
+        console.log(computerScore-2)
       }
-      console.log("Round " + (parseFloat(i)+1)) //printing round
-      let playerSelection = prompt("Enter Rock, Paper, or Scissors!")
-      let computerSelection = computerPlay()
-      game(playerSelection, computerSelection)
-      console.log(playerSelection)
     }
     console.log("Script finished") //print if script has ran fully
+    game()
   </script>
 </body>
 </html>
