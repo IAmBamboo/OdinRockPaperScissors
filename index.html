@@ -9,23 +9,24 @@
     console.log("Script loaded") //print if script has started
     let userScore = 0
     let computerScore = 0
+
     function computerPlay(){ //randomly picks between Rock,Paper,Scissors
-      let choice = ["rock","paper","scissors"];
-      let randomChoice = choice[Math.floor(Math.random()*choice.length)]
+      let choices = ["rock","paper","scissors"];
+      let randomChoice = choices[Math.floor(Math.random()*choices.length)]
       return randomChoice
     }
-    function playRound(player, computer, round){
-      //check choices and return winner
+
+    function playRound(player, computer, round){ //check choices and return winner
       console.log(player + " vs " + computer)
       console.log("Starting Round " + (parseFloat(round+1)))
       let winner
       if (player === "rock" && computer === "scissors" || player === "paper" && computer === "rock" || player === "scissors" && computer === "paper"){
         //win
-        winner = "Player"
+        winner = "player"
         return winner
       } else if (player === "rock" && computer === "paper" || player === "paper" && computer === "scissors" || player === "scissors" && computer === "rock"){
         //lose
-        winner = "Computer"
+        winner = "computer"
         return winner
       } else {
         //draw
@@ -34,22 +35,57 @@
         return winner
       }
     }
+
+    function updateScore(winner){
+      if (winner == "player") {
+        userScore++
+      } else if (winner == "computer") {
+        computerScore++
+      } else {
+        //do nothing
+      }
+    }
+
     function game(){ //execute rounds, keep track of score
       for (let i = 0; i < 5; i++) {
         if (i == 1) {
           console.log("Loop started")
         }
         console.log("Round " + (parseFloat(i)+1)) //printing round
-        let computerSelection = computerPlay()
-        console.log("Computer chose: " + computerSelection)
         let playerSelection = prompt("Enter Rock, Paper, or Scissors!").toLowerCase()
         console.log("Player chose: " + playerSelection)
+        let computerSelection = computerPlay()
+        console.log("Computer chose: " + computerSelection)
         let winner = playRound(playerSelection, computerSelection, i)
         console.log(winner + " won the round!")
-        //updateScore() give point to winner
-        console.log("Player: " + userScore)
-        console.log("Computer: " + computerScore)
-        console.log("===========================")
+        updateScore(winner) //give point to winner
+        //checking round and scores incase there is a winner
+        if ((userScore >= 3) || (computerScore >= 3)){ //if someone has won the BO5 already then end game
+          console.log("Game over! The " + winner + " has won the game!")
+          console.log("-Final Scores-")
+          console.log("Player: " + userScore)
+          console.log("Computer: " + computerScore)
+          break
+        } else if (i==4 && userScore > computerScore){ //PLAYER WIN: if there are no more rounds and the player has the most points
+          console.log("Game over! The player has won the game!")
+          console.log("-Final Scores-")
+          console.log("Player: " + userScore)
+          console.log("Computer: " + computerScore)
+        } else if (i==4 && computerScore > userScore){ //COMPUTER WIN: if there are no more rounds and the computer has the most points
+          console.log("Game over! The computer has won the game!")
+          console.log("-Final Scores-")
+          console.log("Player: " + userScore)
+          console.log("Computer: " + computerScore)
+        } else if (i==4 && userScore == computerScore){ //DRAW: if there are no more rounds and both have the same amount of points
+          console.log("Game over! The match is a draw!")
+          console.log("-Final Scores-")
+          console.log("Player: " + userScore)
+          console.log("Computer: " + computerScore)
+        } else { //continue the game as there are more rounds and no winner yet
+          console.log("Player: " + userScore)
+          console.log("Computer: " + computerScore)
+          console.log("===========================")
+        }
       }
     }
     console.log("Script finished") //print if script has ran fully
