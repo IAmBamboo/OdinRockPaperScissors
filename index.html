@@ -7,31 +7,49 @@
 <body>
   <script>
     console.log("Script loaded") //print if script has started
+    let userScore = 0
+    let computerScore = 0
     function computerPlay(){ //randomly picks between Rock,Paper,Scissors
-      let choice = ["Rock","Paper","Scissors"];
+      let choice = ["rock","paper","scissors"];
       let randomChoice = choice[Math.floor(Math.random()*choice.length)]
       return randomChoice
     }
-    function playRound(player, computer){
-      //check choices and give point to winner
+    function playRound(player, computer, round){
+      //check choices and return winner
+      console.log(player + " vs " + computer)
+      console.log("Starting Round " + (parseFloat(round+1)))
+      let winner
+      if (player === "rock" && computer === "scissors" || player === "paper" && computer === "rock" || player === "scissors" && computer === "paper"){
+        //win
+        winner = "Player"
+        return winner
+      } else if (player === "rock" && computer === "paper" || player === "paper" && computer === "scissors" || player === "scissors" && computer === "rock"){
+        //lose
+        winner = "Computer"
+        return winner
+      } else {
+        //draw
+        console.log("Draw!")
+        winner = "Nobody"
+        return winner
+      }
     }
     function game(){ //execute rounds, keep track of score
-      let userScore = 0
-      let computerScore = 0
       for (let i = 0; i < 5; i++) {
         if (i == 1) {
           console.log("Loop started")
         }
         console.log("Round " + (parseFloat(i)+1)) //printing round
-        let playerSelection = prompt("Enter Rock, Paper, or Scissors!").toLowerCase()
         let computerSelection = computerPlay()
-        //call playRound(playerSelection, computerSelection)
-        console.log(playerSelection)
-        console.log(playerSelection + " vs " + computerSelection)
-        userScore++
-        computerScore++
-        console.log(userScore)
-        console.log(computerScore-2)
+        console.log("Computer chose: " + computerSelection)
+        let playerSelection = prompt("Enter Rock, Paper, or Scissors!").toLowerCase()
+        console.log("Player chose: " + playerSelection)
+        let winner = playRound(playerSelection, computerSelection, i)
+        console.log(winner + " won the round!")
+        //updateScore() give point to winner
+        console.log("Player: " + userScore)
+        console.log("Computer: " + computerScore)
+        console.log("===========================")
       }
     }
     console.log("Script finished") //print if script has ran fully
